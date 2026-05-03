@@ -446,7 +446,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ADL MISSION
+  m_text: MISSION
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -473,8 +473,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 13
-  m_fontSizeBase: 13
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1134,7 +1134,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: c333d927ef2b4b9489554cb7cee5f024, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7c7118abd206ecb4aaf0890449f65d91, type: 3}
   m_Color: {r: 0.9843137, g: 0.9607843, b: 0.9254902, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1548,7 +1548,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Daily Tasks
+  m_text: Collect only edible items
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3078,9 +3078,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HookController
   swingFrequency: 0.2
   swingAmplitude: 80
-  sweetSpotMin: 0.8
-  sweetSpotMax: 2.5
-  maxChargeDuration: 3
+  sweetSpotMin: 5
+  sweetSpotMax: 10
+  maxChargeDuration: 12
   minHookRange: 1.5
   maxHookRange: 11
   hookFireSpeed: 15
@@ -3801,7 +3801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b33115259159d84b9d9d4df58446f94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MissionManager
-  missionTime: 300
+  missionTime: 600
   timerText: {fileID: 1267486277}
   scoreText: {fileID: 1146872718}
   baseScore: 50
@@ -3836,7 +3836,7 @@ MonoBehaviour:
   minSpacing: 2
   itemScale: 0.3
   hitboxScale: 0.3
-  showHitboxes: 1
+  showHitboxes: 0
   itemPrefab: {fileID: 1223107735}
   sparklePrefab: {fileID: 0}
 --- !u!4 &1867408199

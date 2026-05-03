@@ -49,9 +49,9 @@ public class MissionManager : MonoBehaviour
         UpdateTimerUI();
         UpdateScoreUI();
 
-        if (missionTitleText)    missionTitleText.text    = "Daily Tasks";
+        if (missionTitleText)    missionTitleText.text    = "Collect only edible items";
         if (missionSubtitleText) missionSubtitleText.text = "Grab the glowing items!";
-        if (missionTagText)      missionTagText.text      = "ADL MISSION";
+        if (missionTagText)      missionTagText.text      = "MISSION";
 
         itemSpawner?.StartContinuousSpawning();
     }

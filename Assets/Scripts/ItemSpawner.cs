@@ -32,12 +32,21 @@ public class ItemSpawner : MonoBehaviour
     public GameObject     itemPrefab;
     public ParticleSystem sparklePrefab;
 
-    static readonly string[] allItems =
+    // Edible = target (glows, gives points)
+    static readonly string[] edibleItems =
     {
-        "toothbrush", "toothpaste", "cup",
-        "soap", "comb", "hairbrush",
-        "shoe", "keys", "bag", "glasses",
-        "medication", "bottle", "banana"
+        "apple", "banana", "bread", "carrot",
+        "cheese", "cookie", "donut", "egg",
+        "grapes", "sandwich"
+    };
+
+    // Non-edible = distractor (no glow, costs points)
+    static readonly string[] badItems =
+    {
+        "battery", "bleach", "rock", "screw", "sock",
+        "bag", "comb", "hairbrush", "glasses", "shoe",
+        "keys", "soap", "toothbrush", "toothpaste",
+        "cup", "bottle", "medication"
     };
 
     readonly List<GameObject> _active      = new List<GameObject>();
@@ -93,7 +102,8 @@ public class ItemSpawner : MonoBehaviour
             if (g != null) usedPositions.Add(g.transform.position);
 
         bool   isTarget = Random.value < targetRatio;
-        string id       = allItems[Random.Range(0, allItems.Length)];
+        string[] pool   = isTarget ? edibleItems : badItems;
+        string id       = pool[Random.Range(0, pool.Length)];
 
         var go = SpawnItem(id, isTarget);
         if (go != null) _active.Add(go);

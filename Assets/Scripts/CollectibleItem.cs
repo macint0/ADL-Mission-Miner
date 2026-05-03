@@ -29,7 +29,7 @@ public class CollectibleItem : MonoBehaviour
 
         if (glowRenderer != null)
         {
-            Color c = GameColors.MeterGreen;
+            Color c = GameColors.ButterDeep;
             c.a = 0.6f + 0.6f * pulse;
             glowRenderer.color = c;
         }
