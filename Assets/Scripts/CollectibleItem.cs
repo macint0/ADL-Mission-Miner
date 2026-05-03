@@ -25,12 +25,12 @@ public class CollectibleItem : MonoBehaviour
     {
         if (!isTarget) return;
         _pulseT += Time.deltaTime * 2.5f;
-        float pulse = 0.5f + 0.5f * Mathf.Sin(_pulseT);
+        float pulse = 1.0f + 1.0f * Mathf.Sin(_pulseT);
 
         if (glowRenderer != null)
         {
             Color c = GameColors.MeterGreen;
-            c.a = 0.45f + 0.40f * pulse;
+            c.a = 0.6f + 0.6f * pulse;
             glowRenderer.color = c;
         }
         if (glowRendererOuter != null)
