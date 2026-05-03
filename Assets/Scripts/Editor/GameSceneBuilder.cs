@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEditor.Events;
 using UnityEditor.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
 // Menu: ADL > Build Game Scene
@@ -42,6 +43,11 @@ public static class GameSceneBuilder
         // --- InputReader ---
         var inputGo = new GameObject("InputReader");
         inputGo.AddComponent<InputReader>();
+
+        // --- EventSystem (required for UI button clicks) ---
+        var esGo = new GameObject("EventSystem");
+        esGo.AddComponent<EventSystem>();
+        esGo.AddComponent<StandaloneInputModule>();
 
         // --- Hook Pivot ---
         var pivotGo = new GameObject("HookPivot");
@@ -322,9 +328,9 @@ public static class GameSceneBuilder
             new Vector2(0.2f, 0.15f), new Vector2(0.48f, 0.32f), GameColors.Butter, GameColors.Ink);
         UnityEventTools.AddPersistentListener(tryBtn.onClick, mgr.PlayAgain);
 
-        var menuBtn = MakeOverlayButton(overlay, "MenuBtn", "Menu",
+        var exitBtn = MakeOverlayButton(overlay, "ExitBtn", "Exit",
             new Vector2(0.52f, 0.15f), new Vector2(0.8f, 0.32f), GameColors.CreamDeep, GameColors.Ink);
-        UnityEventTools.AddPersistentListener(menuBtn.onClick, mgr.GoToMainMenu);
+        UnityEventTools.AddPersistentListener(exitBtn.onClick, mgr.QuitGame);
     }
 
     static UnityEngine.UI.Button MakeOverlayButton(Transform parent, string name, string label,

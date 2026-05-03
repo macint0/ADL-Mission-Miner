@@ -109,6 +109,14 @@ public class MissionManager : MonoBehaviour
         if (scoreText != null) scoreText.text = score.ToString();
     }
 
-    public void PlayAgain()    => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    public void GoToMainMenu() => SceneManager.LoadScene("MainMenu");
+    public void PlayAgain() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
 }
