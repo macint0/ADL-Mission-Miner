@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>ADL Mission Miner — UI Kit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    /* Soft pastel — calm, high-contrast on cream */
+    --cream:        #FBF5EC;
+    --cream-deep:   #F2E9D8;
+    --paper:        #FFFFFF;
+    --ink:          #2E2A3A;       /* near-black warm */
+    --ink-soft:     #5A546A;
+    --ink-faint:    #9B95A8;
+
+    --mint:         #B8E4D2;
+    --mint-deep:    #6FBFA0;
+    --peach:        #FFD2B8;
+    --peach-deep:   #F2A37A;
+    --lavender:     #D9CBEF;
+    --lavender-deep:#A88FD1;
+    --butter:       #FFE9A8;
+    --butter-deep:  #E8C25A;
+    --sky:          #C7E1F2;
+    --sky-deep:     #7FB3D9;
+    --rose:         #F2C3CC;
+    --rose-deep:    #D98896;
+
+    /* Power meter */
+    --pm-yellow:    #F5D26B;
+    --pm-green:     #7BC796;
+    --pm-red:       #E89090;
+
+    --shadow-paper: 0 2px 0 rgba(46,42,58,.08), 0 6px 14px rgba(46,42,58,.06);
+    --r-sm: 10px;
+    --r-md: 18px;
+    --r-lg: 28px;
+    --r-xl: 40px;
+  }
+
+  html, body { background: #EFE7D6; color: var(--ink); font-family: 'Nunito', system-ui, sans-serif; margin: 0; }
+
+  /* Card chrome inside artboards */
+  .card {
+    background: var(--paper);
+    border-radius: var(--r-md);
+    padding: 28px;
+    box-shadow: var(--shadow-paper);
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .card.cream { background: var(--cream); }
+  .card h3 { margin: 0 0 4px; font-family: 'Fraunces', serif; font-weight: 700; font-size: 22px; letter-spacing: -0.01em; }
+  .card .sub { color: var(--ink-soft); font-size: 14px; margin-bottom: 22px; }
+
+  /* Section row in the canvas */
+  .grid { display: grid; gap: 20px; }
+  .row { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  /* Swatches */
+  .swatch {
+    width: 132px; border-radius: var(--r-sm); overflow: hidden;
+    background: var(--paper); box-shadow: var(--shadow-paper);
+  }
+  .swatch .chip { height: 86px; }
+  .swatch .meta { padding: 10px 12px; }
+  .swatch .name { font-weight: 700; font-size: 13px; }
+  .swatch .hex  { color: var(--ink-soft); font-size: 12px; font-variant-numeric: tabular-nums; }
+
+  /* Type specimens */
+  .type-display { font-family: 'Fraunces', serif; font-weight: 900; letter-spacing: -0.02em; line-height: 0.95; }
+  .type-h1 { font-family: 'Fraunces', serif; font-weight: 700; font-size: 48px; line-height: 1; letter-spacing: -0.015em; }
+  .type-h2 { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 30px; line-height: 1.1; }
+  .type-body { font-family: 'Nunito', sans-serif; font-weight: 600; font-size: 20px; line-height: 1.4; color: var(--ink-soft); }
+  .type-num { font-family: 'Fraunces', serif; font-weight: 900; font-variant-numeric: tabular-nums; font-size: 64px; letter-spacing: -0.02em; }
+
+  /* Sprite tiles */
+  .sprite-tile {
+    width: 156px; height: 156px;
+    background: var(--cream);
+    border-radius: var(--r-md);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    box-shadow: inset 0 0 0 1px rgba(46,42,58,.04);
+  }
+  .sprite-tile.shelf {
+    background: linear-gradient(180deg, #FBF5EC 0%, #FBF5EC 70%, #E8DCC2 70%, #E8DCC2 100%);
+  }
+  .sprite-tile .label {
+    position: absolute; bottom: -22px; left: 0; right: 0; text-align: center;
+    font-size: 12px; font-weight: 700; color: var(--ink-soft);
+  }
+  .sprite-tile.target::after {
+    content: ""; position: absolute; inset: 6px;
+    border-radius: 14px;
+    box-shadow: 0 0 0 3px rgba(232, 194, 90, .55), 0 0 24px 4px rgba(255, 233, 168, .85);
+    pointer-events: none;
+  }
+
+  /* Power meter */
+  .pm-wrap { width: 520px; }
+  .pm-track {
+    height: 36px; border-radius: 999px;
+    background: var(--cream-deep);
+    box-shadow: inset 0 2px 0 rgba(46,42,58,.06);
+    padding: 4px; position: relative;
+    display: flex;
+  }
+  .pm-segments { display: flex; gap: 4px; height: 100%; width: 100%; border-radius: 999px; overflow: hidden; }
+  .pm-seg { flex: 1; }
+  .pm-seg.y { background: var(--pm-yellow); }
+  .pm-seg.g { background: var(--pm-green); }
+  .pm-seg.r { background: var(--pm-red); }
+  .pm-marker {
+    position: absolute; top: -10px; bottom: -10px; width: 6px;
+    background: var(--ink); border-radius: 6px;
+    box-shadow: 0 2px 0 rgba(0,0,0,.15);
+  }
+  .pm-labels { display: flex; justify-content: space-between; margin-top: 10px; font-weight: 700; font-size: 13px; color: var(--ink-soft); }
+
+  /* HUD panel */
+  .hud {
+    background: var(--paper);
+    border-radius: var(--r-md);
+    padding: 14px 22px;
+    box-shadow: var(--shadow-paper);
+    display: inline-flex; align-items: center; gap: 14px;
+  }
+  .hud .ico {
+    width: 40px; height: 40px; border-radius: 12px;
+    display: grid; place-items: center;
+    background: var(--mint); color: var(--ink);
+  }
+  .hud .ico.peach { background: var(--peach); }
+  .hud .ico.lav { background: var(--lavender); }
+  .hud .lbl { font-size: 12px; color: var(--ink-faint); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+  .hud .val { font-family: 'Fraunces', serif; font-weight: 900; font-size: 30px; font-variant-numeric: tabular-nums; line-height: 1; }
+  .hud .val.small { font-size: 22px; }
+
+  /* Mission banner */
+  .mission {
+    display: inline-flex; align-items: center; gap: 14px;
+    background: var(--paper);
+    padding: 14px 26px;
+    border-radius: 999px;
+    box-shadow: var(--shadow-paper);
+  }
+  .mission .pill {
+    background: var(--butter); color: var(--ink);
+    font-weight: 800; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 6px 12px; border-radius: 999px;
+  }
+  .mission .text {
+    font-family: 'Fraunces', serif; font-weight: 700; font-size: 24px; letter-spacing: -0.01em;
+  }
+
+  /* Buttons */
+  .btn {
+    font-family: 'Nunito', sans-serif; font-weight: 800;
+    border: none; cursor: pointer;
+    padding: 18px 28px; border-radius: 18px;
+    font-size: 18px; letter-spacing: 0.01em;
+    box-shadow: 0 3px 0 rgba(46,42,58,.18), 0 6px 14px rgba(46,42,58,.08);
+    transition: transform .08s ease, box-shadow .08s ease;
+  }
+  .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(46,42,58,.18); }
+  .btn.primary { background: var(--mint-deep); color: white; }
+  .btn.fire    { background: #F2A37A; color: #3A1F12; }
+  .btn.ghost   { background: var(--cream); color: var(--ink); }
+
+  /* Scene preview */
+  .scene {
+    width: 100%; height: 100%;
+    background:
+      radial-gradient(120% 80% at 50% 0%, #FFF6E4 0%, #F2E5C9 60%, #E2D2AE 100%);
+    border-radius: var(--r-md);
+    position: relative; overflow: hidden;
+  }
+  .scene .wall-stripes {
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.0) 0 38px, rgba(255,255,255,.35) 38px 76px);
+    opacity: .35;
+  }
+  .scene .shelf {
+    position: absolute; left: 4%; right: 4%; height: 14px;
+    background: #C9A77A; border-radius: 4px;
+    box-shadow: 0 6px 0 rgba(0,0,0,.06), 0 14px 22px rgba(0,0,0,.08);
+  }
+  .scene .shelf::before {
+    content: ""; position: absolute; left: 6%; right: 6%; top: -4px; height: 4px;
+    background: #E2C499; border-radius: 4px;
+  }
+
+  /* Sticker base — paper-cutout look */
+  .sticker {
+    filter:
+      drop-shadow(0 2px 0 rgba(0,0,0,.08))
+      drop-shadow(0 6px 8px rgba(46,42,58,.12));
+  }
+
+  .legend { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 8px; color: var(--ink-soft); font-size: 13px; }
+  .legend .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+</style>
+</head>
+<body>
+
+<!-- React + Babel -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<div id="root"></div>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="sprites.jsx"></script>
+<script type="text/babel" src="kit.jsx"></script>
+
+</body>
+</html>
